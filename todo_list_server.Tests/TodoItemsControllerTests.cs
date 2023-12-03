@@ -19,8 +19,8 @@ public class TodoItemsControllerTests
         // Insert seed data into the in-memory database
         using (var context = new TodoContext(options))
         {
-            context.TodoItems.Add(new TodoItem { Name = "Task 1", IsComplete = false });
-            context.TodoItems.Add(new TodoItem { Name = "Task 2", IsComplete = true });
+            context.TodoItems.Add(new TodoItem { Name = "Task 1", IsComplete = false , Description=""});
+            context.TodoItems.Add(new TodoItem { Name = "Task 2", IsComplete = true , Description=""});
             context.SaveChanges();
         }
 
@@ -34,8 +34,8 @@ public class TodoItemsControllerTests
             var actionResult = Assert.IsType<ActionResult<IEnumerable<TodoItem>>>(result);
             var returnValue = Assert.IsType<List<TodoItem>>(actionResult.Value);
             Assert.Equal(2, returnValue.Count);
-            Assert.Contains(returnValue, item => item.Name == "Task 1" && item.IsComplete == false);
-            Assert.Contains(returnValue, item => item.Name == "Task 2" && item.IsComplete == true);
+            Assert.Contains(returnValue, item => item.Name == "Task 1" && item.IsComplete == false && item.Description == "");
+            Assert.Contains(returnValue, item => item.Name == "Task 2" && item.IsComplete == true && item.Description == "");
         }
     }
 

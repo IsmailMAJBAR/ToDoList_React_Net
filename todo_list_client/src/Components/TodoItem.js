@@ -8,6 +8,7 @@ const TodoItem = ({ todo, setTodos }) =>
   const [ isEditing, setIsEditing ] = useState(false);
   const [ updatedName, setUpdatedName ] = useState(todo.name);
   const [ isComplete, setIsComplete ] = useState(todo.isComplete);
+  const [ updatedDescription, setUpdatedDescription ] = useState(todo.Description);
 
   const handleEdit = () =>
   {
@@ -16,7 +17,7 @@ const TodoItem = ({ todo, setTodos }) =>
 
   const handleUpdate = () =>
   {
-    const updatedTodo = { ...todo, name: updatedName, isComplete };
+    const updatedTodo = { ...todo, name: updatedName, isComplete, Description: updatedDescription };
 
     fetch(`http://localhost:5288/api/TodoItems/${ todo.id }`, {
       method: 'PUT',
@@ -36,7 +37,7 @@ const TodoItem = ({ todo, setTodos }) =>
         setTodos(todos => todos.map(t => (t.id === todo.id ? updatedTodo : t)));
         setIsEditing(false);
       })
-    //.catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error:', error));
   };
 
   const handleDelete = () =>
@@ -68,8 +69,18 @@ const TodoItem = ({ todo, setTodos }) =>
               placeholder="Task Name"
               className="form-control"
               value={ updatedName }
+              required
               onChange={ (e) => setUpdatedName(e.target.value) }
             />
+            <input
+              type="text"
+              name="inputUpdateDecription"
+              placeholder="Description"
+              className="form-control"
+              value={ updatedDescription }
+              required
+              onChange={ (e) => setUpdatedDescription(e.target.value) }
+            ></input>
             <div className=" input-group-append">
               <button className="btn btn-success"
                 name="btnUpdate" onClick={ handleUpdate }>Update
@@ -84,6 +95,7 @@ const TodoItem = ({ todo, setTodos }) =>
             data-toggle="tooltip" data-placement="bottom" title="Edit">
             { todo.name }
           </span>
+
           <button className="btn btn-primary btn-sm"
             name="btnEdit"
             onClick={ handleEdit }>

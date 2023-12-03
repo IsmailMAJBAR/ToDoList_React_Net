@@ -60,6 +60,7 @@ namespace todo_list_server.Controllers
             }
             todoItem.Name = item.Name;
             todoItem.IsComplete = item.IsComplete;
+            todoItem.Description = todoItem.Description;
             await _context.SaveChangesAsync();
             return NoContent();
         }
