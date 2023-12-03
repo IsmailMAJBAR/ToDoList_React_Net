@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background-color: #eeebeb;
+  font-family: 'Arial', sans-serif;
+}
+
+.todo-name:hover{
+  cursor:pointer
+}
