@@ -90,8 +90,8 @@ const TodoItem = ({ todo, setTodos }) =>
           </div>
         </div>
       ) : (
-        <div className="d-flex justify-content-between align-items-center">
-          <span className={ `me-auto todo-name ${ isComplete ? 'text-decoration-line-through' : '' }` } onClick={ handleEdit }
+        <div className="d-flex justify-content-between align-items-center" onClick={ handleEdit }>
+          <span className={ `me-auto todo-name ${ isComplete ? 'text-decoration-line-through' : '' }` }
             data-toggle="tooltip" data-placement="bottom" title="Edit">
             { todo.name }
           </span>

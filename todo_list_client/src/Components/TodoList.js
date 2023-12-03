@@ -21,9 +21,16 @@ const TodoList = () =>
           <h2 className="text-center mb-4">Todo List</h2>
           <AddTodoForm setTodos={ setTodos } />
           <div className="list-group">
-            { todos.map(todo => (
-              <TodoItem key={ todo.id } todo={ todo } setTodos={ setTodos } />
-            )) }
+            { todos.slice() // Create a shallow copy of the array to avoid modifying the original array
+              .sort((a, b) =>
+              { // Sort by completion status first
+                if (a.isComplete !== b.isComplete)
+                { return a.isComplete ? 1 : -1; }
+                // For items with the same completion status, sort by ID (newest first)
+                return b.id - a.id;
+              }).map(todo => (
+                <TodoItem key={ todo.id } todo={ todo } setTodos={ setTodos } />
+              )) }
           </div>
         </div>
       </div>
